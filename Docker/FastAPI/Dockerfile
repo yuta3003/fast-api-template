@@ -6,10 +6,10 @@ ENV PYTHONUTF8=1
 WORKDIR /src
 
 RUN pip install poetry
-RUN poetry config virtualenvs.in-project true
+RUN poetry config virtualenvs.in-project false
 
 COPY ./FastAPI/pyproject.toml ./pyproject.toml
 COPY ./FastAPI/poetry.lock ./poetry.lock
-RUN if [ -f pyproject.toml ]; then poetry install --no-root; fi
+RUN poetry install --no-root
 
 ENTRYPOINT ["poetry", "run", "uvicorn", "api.main:app", "--host", "0.0.0.0", "--port", "8000", "--reload"]
