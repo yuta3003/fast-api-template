@@ -39,7 +39,20 @@ services:
         ipv4_address: 192.168.10.102
       backend:
         ipv4_address: 192.168.20.102
-
+  db:
+    image: mysql:8.0
+    platform: linux/x86_64  # M1 Macの場合必要
+    environment:
+      MYSQL_ALLOW_EMPTY_PASSWORD: 'yes'  # rootアカウントをパスワードなしで作成
+      MYSQL_DATABASE: 'prod'  # 初期データベースとしてdemoを設定
+      TZ: 'Asia/Tokyo'  # タイムゾーンを日本時間に設定
+    volumes:
+      - mysql_data:/var/lib/mysql
+    command: --default-authentication-plugin=mysql_native_password  # MySQL8.0ではデフォルトが"caching_sha2_password"で、ドライバが非対応のため変更
+    ports:
+      - 33306:3306  # ホストマシンのポート33306を、docker内のポート3306に接続する
+volumes:
+  mysql_data:
 
 networks:
   frontend:
