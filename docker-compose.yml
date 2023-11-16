@@ -13,7 +13,7 @@ services:
     tty: true
     networks:
       frontend:
-        ipv4_address: 192.168.10.100
+        ipv4_address: 192.168.10.101
 
 
   api:
@@ -22,14 +22,12 @@ services:
       dockerfile: ./Docker/FastAPI/Dockerfile
     volumes:
       - ./FastAPI:/src
-    ports:
-      - 8000:8000
     tty: true
     networks:
       frontend:
-        ipv4_address: 192.168.10.101
+        ipv4_address: 192.168.10.102
       backend:
-        ipv4_address: 192.168.20.101
+        ipv4_address: 192.168.20.102
 
 
 networks:
