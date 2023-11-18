@@ -2,7 +2,7 @@ from sqlalchemy import create_engine
 
 from api.models.task import Base
 
-DB_URL = "mysql+pymysql://root@192.168.20.103:3306/prod?charset=utf8"
+DB_URL = "mysql+pymysql://root@db:3306/prod?charset=utf8"
 engine = create_engine(DB_URL, echo=True)
 
 
