@@ -21,6 +21,7 @@ services:
     build:
       context: .
       dockerfile: ./Docker/OMGWTFSSL/Dockerfile
+    platform: linux/x86_64  # M1 Macの場合必要
     environment:
       - SSL_SUBJECT="localhost"
       - SSL_DNS="localhost"
