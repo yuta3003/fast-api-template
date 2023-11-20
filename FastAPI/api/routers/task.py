@@ -14,11 +14,13 @@ router = APIRouter()
 async def list_tasks(db: AsyncSession = Depends(get_db)):
     return await task_crud.get_tasks_with_done(db)
 
+
 @router.post("/tasks", response_model=task_schema.TaskCreateResponse)
 async def create_task(
     task_body: task_schema.TaskCreate, db: AsyncSession = Depends(get_db)
 ):
     return await task_crud.create_task(db, task_body)
+
 
 @router.put("/tasks/{task_id}", response_model=task_schema.TaskCreateResponse)
 async def update_task(
@@ -29,6 +31,7 @@ async def update_task(
         raise HTTPException(status_code=404, detail="Task not found")
 
     return await task_crud.update_task(db, task_body, original=task)
+
 
 @router.delete("/tasks/{task_id}", response_model=None)
 async def delete_task(task_id: int, db: AsyncSession = Depends(get_db)):
