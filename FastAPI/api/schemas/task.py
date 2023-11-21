@@ -4,7 +4,15 @@ from pydantic import BaseModel, ConfigDict, Field
 
 
 class TaskBase(BaseModel):
-    title: Optional[str] = Field(None, example="クリーニングを取りに行く")
+    model_config = {
+        "json_schema_extra": {
+            "examples": [
+                {
+                    "title": "クリーニングを取りに行く",
+                }
+            ]
+        }
+    }
 
 
 class Task(TaskBase):
